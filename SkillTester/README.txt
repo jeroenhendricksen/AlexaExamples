@@ -43,7 +43,7 @@ public final class MyFirstSpeechletRequestStreamHandler extends SpeechletRequest
     private static final Set<String> supportedApplicationIds = new HashSet<String>();
 
     static {
-	supportedApplicationIds.add("amzn1.echo-sdk-ams.app.[    see https://developer.amazon.com/       ]");
+        supportedApplicationIds.add("amzn1.echo-sdk-ams.a`pp.[    see https://developer.amazon.com/       ]");
     }
 
     public TestSpeechletRequestStreamHandler() {
