@@ -1,4 +1,0 @@
-TestIntent start
-
-AnswerIntent {Answer}
-

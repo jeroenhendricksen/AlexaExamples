@@ -33,8 +33,10 @@ public class MyFirstSpeechlet implements Speechlet {
         Intent intent = request.getIntent();
         String intentName = (intent != null) ? intent.getName() : null;
 
-        if ("MyFirstIntent".equals(intentName)) {
-            return getMyFirstAppIntentResponse();
+        if ("InitialContactIntent".equals(intentName)) {
+            return getInitialIntentResponse();
+        } else if ("GivingMyNameIntent".equals(intentName)) {
+            return getNameIntentResponse(intent);
         } else {
             throw new SpeechletException("Invalid Intent");
         }
@@ -46,9 +48,29 @@ public class MyFirstSpeechlet implements Speechlet {
         // Place for cleanup logic.
     }
 
-    private SpeechletResponse getMyFirstAppIntentResponse() {
-        String text = "Hello from My First Skill";
+    private SpeechletResponse getInitialIntentResponse() {
+        String text = "Welcome at our company. Please tell me your name so I can check if you have an appointment.";
 
+        // Card used in the Alexa interface
+        SimpleCard card = new SimpleCard();
+        card.setTitle("Normal response");
+        card.setContent(text);
+
+        // The text that will be spoken by Alexa
+        PlainTextOutputSpeech speech = new PlainTextOutputSpeech();
+        speech.setText(text);
+
+        return SpeechletResponse.newTellResponse(speech, card);
+    }
+
+    private SpeechletResponse getNameIntentResponse(Intent intent) {
+        String first_name = intent.getSlot("CustomerNameGB").getValue();
+        String text = "";
+        if (first_name != null) {
+            text = "Hi " + first_name + ", I've checked the corporate agenda, and it seems you do not have a meeting scheduled. I'm sorry. A colleague has been notified and will contact you shortly.";
+        } else {
+            text = "I didn't get your name. Would you like to try again?";
+        }
         // Card used in the Alexa interface
         SimpleCard card = new SimpleCard();
         card.setTitle("Normal response");
