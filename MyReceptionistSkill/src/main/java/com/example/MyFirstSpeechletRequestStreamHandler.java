@@ -11,7 +11,12 @@ public final class MyFirstSpeechletRequestStreamHandler extends SpeechletRequest
 
     // Be careful this makes your code available to anyone
     static {
-        System.setProperty("com.amazon.speech.speechlet.servlet.disableRequestSignatureCheck", "true");
+        /*
+         * This Id can be found on https://developer.amazon.com/edw/home.html#/ "Edit" the relevant
+         * Alexa Skill and put the relevant Application Ids in this Set.
+         */
+        supportedApplicationIds.add("amzn1.ask.skill.7801858a-eee6-46d4-8f88-d79666f5ca25");
+        
     }
 
     public MyFirstSpeechletRequestStreamHandler() {

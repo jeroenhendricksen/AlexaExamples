@@ -1,5 +1,8 @@
 package com.example;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.amazon.speech.slu.Intent;
 import com.amazon.speech.speechlet.IntentRequest;
 import com.amazon.speech.speechlet.LaunchRequest;
@@ -10,26 +13,34 @@ import com.amazon.speech.speechlet.Speechlet;
 import com.amazon.speech.speechlet.SpeechletException;
 import com.amazon.speech.speechlet.SpeechletResponse;
 import com.amazon.speech.ui.PlainTextOutputSpeech;
+import com.amazon.speech.ui.Reprompt;
 import com.amazon.speech.ui.SimpleCard;
 
 public class MyFirstSpeechlet implements Speechlet {
+    private static final Logger log = LoggerFactory.getLogger(MyFirstSpeechlet.class);
 
     @Override
     public void onSessionStarted(final SessionStartedRequest request, final Session session)
             throws SpeechletException {
-        // Place for initialization logic.
+        log.info("onSessionStarted requestId={}, sessionId={}", request.getRequestId(),
+        session.getSessionId());
+        // any initialization logic goes here
     }
 
     @Override
     public SpeechletResponse onLaunch(final LaunchRequest request, final Session session)
             throws SpeechletException {
-        // Place for launch logic, such as a welcome message.
-        return null;
+        log.info("onLaunch requestId={}, sessionId={}", request.getRequestId(),
+                session.getSessionId());
+        return getInitialIntentResponse();
     }
 
     @Override
     public SpeechletResponse onIntent(final IntentRequest request, final Session session)
             throws SpeechletException {
+        log.info("onIntent requestId={}, sessionId={}", request.getRequestId(),
+                session.getSessionId());
+        
         Intent intent = request.getIntent();
         String intentName = (intent != null) ? intent.getName() : null;
 
@@ -45,12 +56,15 @@ public class MyFirstSpeechlet implements Speechlet {
     @Override
     public void onSessionEnded(final SessionEndedRequest request, final Session session)
             throws SpeechletException {
-        // Place for cleanup logic.
+        log.info("onSessionEnded requestId={}, sessionId={}", request.getRequestId(),
+                session.getSessionId());
+        // any cleanup logic goes here
     }
 
     private SpeechletResponse getInitialIntentResponse() {
-        String text = "Welcome at our company. Please tell me your name so I can check if you have an appointment.";
-
+        String repromptText = "Please tell me your name so I can check if you have an appointment.";
+        String text = "Welcome at our company. " + repromptText;
+        
         // Card used in the Alexa interface
         SimpleCard card = new SimpleCard();
         card.setTitle("Normal response");
@@ -60,7 +74,11 @@ public class MyFirstSpeechlet implements Speechlet {
         PlainTextOutputSpeech speech = new PlainTextOutputSpeech();
         speech.setText(text);
 
-        return SpeechletResponse.newTellResponse(speech, card);
+        // Create reprompt
+        Reprompt reprompt = new Reprompt();
+        reprompt.setOutputSpeech(speech);
+
+        return SpeechletResponse.newAskResponse(speech, reprompt, card);
     }
 
     private SpeechletResponse getNameIntentResponse(Intent intent) {
