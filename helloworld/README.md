@@ -51,3 +51,7 @@ To automatically deploy, do the following:
 1. Rename `env-sample.sh` to `env.sh`
 1. Fill all the values
 1. Run `deploy.sh` to deploy (on Mac or Linux) 
+
+### Testing
+
+1. To test the skill, say "Alexa, ask my hello world"
