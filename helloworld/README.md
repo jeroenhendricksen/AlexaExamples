@@ -39,7 +39,7 @@ To run this example skill you need to do two things. The first is to deploy the 
 1. Copy the Intent Schema from the included IntentSchema.json.
 1. Copy the Sample Utterances from the included SampleUtterances.txt. Click Next.
 1. Go back to the skill Information tab and copy the appId. Paste the appId into the HelloWorldSpeechletRequestStreamHandler.java file for the variable supportedApplicationIds,
-   then update the lambda source zip file with this change and upload to lambda again, this step makes sure the lambda function only serves request from authorized source.
+   then update the lambda source zip file with this change and upload to lambda again, this step makes sure the lambda function only serves request from authorized source. At current, it has my skill id prefilled. Be sure to either remove it, or fill it with your skill id.
 1. You are now able to start testing your sample skill! You should be able to go to the [Echo webpage](http://echo.amazon.com/#skills) and see your skill enabled.
 1. In order to test it, try to say some of the Sample Utterances from the Examples section below.
 1. Your skill is now saved and once you are finished testing you can continue to publish your skill.
