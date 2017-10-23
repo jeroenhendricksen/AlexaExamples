@@ -4,8 +4,8 @@ Alexa examples using maven to help with automated deployment of the skill to AWS
 
 ## Contents
 
-`helloworld/` --> A Hello World sample, with automated (production) deployment using maven
-`MyReceptionistSkill` --> A receptionist skill, created as a sample for the presentation
+- `helloworld/` --> A Hello World sample for a very basic skill. Also includes a script for automated deployment using maven
+- `MyReceptionistSkill/` --> A receptionist skill, created as a sample for the presentation
 
 ## Credits
 
