@@ -92,9 +92,9 @@
                 {
                   "functionName": "MyReceptionistSkill",
                   "description": "This is my receptionist skill",
-                  "handler": "com.example.MyFirstSpeechletRequestStreamHandler",
+                  "handler": "com.example.MyReceptionistSpeechletRequestStreamHandler",
                   "timeout": 10,
-                  "memorySize": 192,
+                  "memorySize": 128,
                   "triggers": [
                     { "integration": "Alexa Skills Kit" }
                   ]
